@@ -1,0 +1,303 @@
+================================================================================
+                    MIGRION - ERP DATA MIGRATION PLATFORM
+                              GET STARTED GUIDE
+================================================================================
+
+Welcome to Migrion! This file will help you get up and running quickly.
+
+================================================================================
+QUICK START (5 MINUTES)
+================================================================================
+
+1. INSTALL DEPENDENCIES
+   ---------------------
+   Open terminal in this directory and run:
+
+   pip install -r requirements.txt
+
+
+2. SET UP ENVIRONMENT
+   -------------------
+   Create a .env file:
+
+   Windows: copy .env.example .env
+   Mac/Linux: cp .env.example .env
+
+   Then edit .env and add your Gemini API key:
+
+   GEMINI_API_KEY=your_key_here
+   MONGODB_URI=mongodb://localhost:27017/  (optional)
+
+
+3. GET FREE GEMINI 2.0 FLASH API KEY (No Credit Card!)
+   ---------------------------------------------------
+   Visit: https://ai.google.dev/
+   Click "Get API Key"
+   Sign in with Google account
+   Create API key and copy to .env file
+
+   Benefits of Gemini 2.0 Flash (FREE):
+   - Completely free forever
+   - Faster than Gemini Pro
+   - 15 requests/min, 1,500/day
+   - No credit card ever required
+
+
+4. GENERATE DEMO DATA
+   -------------------
+   python src/modules/data_generator.py
+
+   This creates 10,000+ realistic records for testing.
+
+
+5. RUN THE APPLICATION
+   --------------------
+   streamlit run app.py
+
+   Or use the launcher:
+   Windows: run_migrion.bat
+   Mac/Linux: ./run_migrion.sh
+
+
+6. OPEN IN BROWSER
+   ----------------
+   Go to: http://localhost:8501
+
+================================================================================
+FIRST STEPS IN THE APP
+================================================================================
+
+OPTION 1: Try the Demo
+-----------------------
+1. On Home page, click "Try Demo" tab
+2. Click "Load Demo" for Orange League Ventures
+3. Explore all features with pre-loaded data
+
+OPTION 2: Create Your Own Project
+----------------------------------
+1. Click "Start New Project"
+2. Fill in organization details
+3. Generate AI-powered migration plan
+4. Upload your CSV data
+5. Follow the workflow through all 9 pages
+
+================================================================================
+THE 9 PAGES EXPLAINED
+================================================================================
+
+1. HOME
+   - Welcome screen
+   - Demo data loader
+   - Feature overview
+
+2. PROJECT INTAKE
+   - Company information form
+   - Migration parameters
+   - AI-generated migration plan
+
+3. DATA QUALITY
+   - Upload CSV files
+   - Quality metrics and visualizations
+   - PII detection
+   - AI insights and recommendations
+
+4. SCHEMA MAPPING
+   - Source and target schema input
+   - AI-powered field mapping
+   - Confidence scores
+   - Export to JSON/CSV/SQL
+
+5. KNOWLEDGE GRAPH
+   - Entity relationship visualization
+   - Interactive network graphs
+   - Multiple layout options
+
+6. VALIDATION
+   - AI-suggested validation rules
+   - Rule execution on sample data
+   - Issue detection and reporting
+
+7. OPTIMIZER
+   - Migration strategy recommendations
+   - Cost-benefit analysis
+   - Timeline visualization
+   - Alternative strategies
+
+8. AUDIT & COMPLIANCE
+   - PII detection and categorization
+   - GDPR compliance checking
+   - Audit trail generation
+   - Compliance reports
+
+9. MIGRATION EXECUTION
+   - MongoDB migration simulation
+   - Real-time progress tracking
+   - Batch processing
+   - Post-migration validation
+
+10. DASHBOARD
+    - Project overview
+    - Quality metrics
+    - Progress charts
+    - Activity feed
+
+================================================================================
+INCLUDED DATASETS
+================================================================================
+
+1. Orange League Ventures Technologies (SYNTHETIC)
+   - 5,000 customers
+   - 1,200 projects
+   - 3,500 invoices
+   - 250 users
+   - 150 products
+   Location: data/examples/orange_league/
+
+2. Olist E-commerce (REAL, ANONYMIZED)
+   - 100,000+ Brazilian e-commerce orders
+   - 8 related CSV files
+   - Real-world data structure
+   Location: Olist ecommerce dataset (Brazil)/
+
+================================================================================
+KEY FEATURES
+================================================================================
+
+✓ AI-Powered Planning - Gemini generates migration plans
+✓ Data Quality Analysis - Comprehensive profiling and metrics
+✓ Smart Schema Mapping - Auto-map fields with confidence scores
+✓ Knowledge Graphs - Visualize entity relationships
+✓ Validation Engine - AI-suggested validation rules
+✓ Strategy Optimizer - Recommend best migration approach
+✓ Audit & Compliance - GDPR, PII detection, audit trails
+✓ MongoDB Migration - Real-time migration with progress tracking
+✓ Interactive Dashboard - Overview of entire project
+✓ Export Capabilities - JSON, CSV, SQL exports
+
+================================================================================
+AI AGENTS
+================================================================================
+
+The platform uses 6 specialized Gemini AI agents:
+
+1. PlannerAgent - Migration plan generation
+2. MapperAgent - Schema field mapping
+3. QualityAgent - Data quality insights
+4. ValidationAgent - Validation rule suggestions
+5. OptimizerAgent - Strategy optimization
+6. AuditorAgent - Compliance checking
+
+================================================================================
+TECHNOLOGY STACK
+================================================================================
+
+Frontend: Streamlit 1.32.0
+AI: Google Gemini Pro (free tier)
+Data: Pandas, NumPy
+Visualization: Plotly, NetworkX, Pyvis
+Database: MongoDB (optional)
+Language: Python 3.8+
+
+================================================================================
+PROJECT STRUCTURE
+================================================================================
+
+app.py                  - Main application
+requirements.txt        - Python dependencies
+.env                    - Your API keys (create this!)
+
+src/
+  agents/               - AI agents (Gemini)
+  modules/              - Business logic
+  pages/                - 10 Streamlit pages
+  utils/                - Helpers and styling
+
+data/
+  examples/             - Demo datasets
+
+outputs/                - Exported reports
+logs/                   - Application logs
+
+================================================================================
+DOCUMENTATION
+================================================================================
+
+README.md              - Full documentation
+QUICKSTART.md          - 5-minute quick start
+INSTALLATION.md        - Detailed installation guide
+PROJECT_SUMMARY.md     - Comprehensive project overview
+GET_STARTED.txt        - This file
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "streamlit: command not found"
+Solution: python -m streamlit run app.py
+
+Problem: "GEMINI_API_KEY is not set"
+Solution: Create .env file and add your API key
+
+Problem: "Module not found" errors
+Solution: pip install -r requirements.txt
+
+Problem: MongoDB connection fails
+Solution: MongoDB is optional! Skip migration execution feature
+
+Problem: Slow AI responses
+Solution: Normal for free tier (2-5 seconds per request)
+
+================================================================================
+VERIFICATION
+================================================================================
+
+To verify your setup is correct, run:
+
+python verify_setup.py
+
+This checks:
+- Python version
+- Dependencies
+- Environment variables
+- Directory structure
+- Example data
+
+================================================================================
+SUPPORT
+================================================================================
+
+For help:
+1. Check README.md for detailed documentation
+2. Review QUICKSTART.md for quick tips
+3. Run verify_setup.py to diagnose issues
+4. Check logs/ directory for error logs
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. ✓ Install dependencies (pip install -r requirements.txt)
+2. ✓ Create .env file with Gemini API key
+3. ✓ Generate demo data (python src/modules/data_generator.py)
+4. ✓ Run the app (streamlit run app.py)
+5. ✓ Try the demo (Orange League Ventures)
+6. ✓ Explore all 9 pages
+7. ✓ Upload your own CSV data
+8. ✓ Generate migration plans
+9. ✓ Export reports and mappings
+
+================================================================================
+YOU'RE READY TO GO!
+================================================================================
+
+Commands to run right now:
+
+1. pip install -r requirements.txt
+2. copy .env.example .env
+   (Then edit .env and add your Gemini API key)
+3. streamlit run app.py
+4. Open http://localhost:8501 in your browser
+
+Enjoy Migrion - Transform Your Data Migration Journey!
+
+================================================================================

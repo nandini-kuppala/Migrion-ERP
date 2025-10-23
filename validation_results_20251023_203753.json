@@ -1,0 +1,69 @@
+{
+  "timestamp": "2025-10-23T20:37:48.603713",
+  "total_rows": 8,
+  "total_checks": 10,
+  "passed_checks": 7,
+  "failed_checks": 3,
+  "errors": [],
+  "warnings": [],
+  "field_results": {
+    "customer_id": {
+      "total_checks": 2,
+      "passed": 2,
+      "failed": 0,
+      "issues": []
+    },
+    "email": {
+      "total_checks": 2,
+      "passed": 1,
+      "failed": 1,
+      "issues": [
+        {
+          "type": "format",
+          "message": "Found 2 invalid email formats",
+          "severity": "Critical",
+          "affected_rows": 2
+        }
+      ]
+    },
+    "age": {
+      "total_checks": 1,
+      "passed": 0,
+      "failed": 1,
+      "issues": [
+        {
+          "type": "range",
+          "message": "Found 1 negative values",
+          "severity": "High",
+          "affected_rows": 1
+        },
+        {
+          "type": "range",
+          "message": "Found 2 unrealistic age values",
+          "severity": "High",
+          "affected_rows": 2
+        }
+      ]
+    },
+    "purchase_amount": {
+      "total_checks": 2,
+      "passed": 1,
+      "failed": 1,
+      "issues": [
+        {
+          "type": "range",
+          "message": "Found 1 negative values",
+          "severity": "High",
+          "affected_rows": 1
+        }
+      ]
+    },
+    "registration_date": {
+      "total_checks": 3,
+      "passed": 3,
+      "failed": 0,
+      "issues": []
+    }
+  },
+  "pass_rate": 0.7
+}
