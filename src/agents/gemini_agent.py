@@ -2,7 +2,7 @@
 import json
 from typing import Any, Dict, List, Optional
 import google.generativeai as genai
-from src.utils.config import GEMINI_API_KEY, GEMINI_MODEL, GEMINI_TEMPERATURE
+from src.utils.config import GEMINI_API_KEY, GEMINI_MODEL, GEMINI_TEMPERATURE, GEMINI_MAX_OUTPUT_TOKENS
 from src.utils.helpers import setup_logger
 
 logger = setup_logger("gemini_agent")
@@ -27,7 +27,7 @@ class GeminiAgent:
                 prompt,
                 generation_config=genai.types.GenerationConfig(
                     temperature=kwargs.get('temperature', self.temperature),
-                    max_output_tokens=kwargs.get('max_output_tokens', 2048),
+                    max_output_tokens=kwargs.get('max_output_tokens', GEMINI_MAX_OUTPUT_TOKENS),
                 )
             )
             return response.text
