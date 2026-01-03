@@ -44,7 +44,7 @@ GEMINI_API_KEY = get_secret("GEMINI_API_KEY", "")
 MONGODB_URI = get_secret("MONGODB_URI", "")
 
 # Gemini Configuration
-GEMINI_MODEL = "gemini-2.0-flash-exp"  # Free tier model
+GEMINI_MODEL = "gemini-2.5-pro"  # Free tier model
 GEMINI_TEMPERATURE = 0.7
 GEMINI_MAX_OUTPUT_TOKENS = 8192  # Flash model supports more tokens
 
