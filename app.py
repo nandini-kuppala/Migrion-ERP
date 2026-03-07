@@ -29,6 +29,7 @@ init_session_state("migration_plan", None)
 init_session_state("quality_reports", {})
 init_session_state("mappings", {})
 init_session_state("selected_dataset", None)
+init_session_state("theme", "dark")
 
 
 def main():
@@ -56,8 +57,10 @@ def main():
                 "Knowledge Graph",
                 "Validation",
                 "Optimizer",
+                "Transform Preview",
                 "Audit & Compliance",
                 "Migration Execution",
+                "Migration History",
                 "Dashboard"
             ],
             icons=[
@@ -68,8 +71,10 @@ def main():
                 "diagram-2",
                 "check-circle",
                 "lightning",
+                "arrow-left-right",
                 "shield-check",
                 "play-circle",
+                "clock-history",
                 "speedometer2"
             ],
             menu_icon="cast",
@@ -96,6 +101,14 @@ def main():
 
         st.markdown("---")
 
+        # Theme Toggle
+        theme_label = "🌙 Dark" if get_session_state("theme") == "dark" else "☀️ Light"
+        if st.button(f"Theme: {theme_label}", use_container_width=True, key="theme_toggle"):
+            current = get_session_state("theme")
+            new_theme = "light" if current == "dark" else "dark"
+            set_session_state("theme", new_theme)
+            st.rerun()
+
         # Quick Stats in Sidebar
         if get_session_state("project_data"):
             st.markdown("### 📊 Project Stats")
@@ -117,8 +130,10 @@ def main():
         "Knowledge Graph": show_knowledge_graph,
         "Validation": show_validation,
         "Optimizer": show_optimizer,
+        "Transform Preview": show_transform_preview,
         "Audit & Compliance": show_audit_compliance,
         "Migration Execution": show_migration_execution,
+        "Migration History": show_migration_history,
         "Dashboard": show_dashboard
     }
 
@@ -295,6 +310,18 @@ def show_dashboard():
     """Dashboard page."""
     from src.pages import dashboard
     dashboard.render()
+
+
+def show_transform_preview():
+    """Transform preview page."""
+    from src.pages import transform_preview
+    transform_preview.render()
+
+
+def show_migration_history():
+    """Migration history page."""
+    from src.pages import migration_history
+    migration_history.render()
 
 
 if __name__ == "__main__":

@@ -145,6 +145,83 @@ def render():
             else:
                 st.info(f"ℹ️ {alert['message']}")
 
+    # --- PDF Report Export ---
+    st.markdown("---")
+    st.markdown("### 📄 Export Full Report")
+
+    col1, col2, col3 = st.columns([2, 1, 2])
+    with col2:
+        if st.button("Generate PDF Report", type="primary", use_container_width=True):
+            with st.spinner("Generating PDF report..."):
+                try:
+                    from src.modules.pdf_report import MigrationReportGenerator
+
+                    generator = MigrationReportGenerator()
+                    pdf_bytes = generator.generate_full_report(
+                        project_data=get_session_state("project_data") or {},
+                        quality_metrics=dashboard_data.get("quality", {}),
+                    )
+                    st.download_button(
+                        "⬇️ Download PDF Report",
+                        data=pdf_bytes,
+                        file_name=f"migrion_report_{datetime.now().strftime('%Y%m%d')}.pdf",
+                        mime="application/pdf",
+                        use_container_width=True
+                    )
+                    st.success("PDF report generated!")
+                except Exception as e:
+                    st.error(f"PDF generation failed: {e}")
+
+    # --- Risk Prediction ---
+    st.markdown("---")
+    st.markdown("### 🎯 AI Risk Assessment")
+
+    if st.button("Run Risk Prediction", use_container_width=False):
+        with st.spinner("Training model and predicting risk..."):
+            try:
+                from src.modules.risk_predictor import RiskPredictor
+
+                predictor = RiskPredictor()
+                predictor.train()
+
+                quality = dashboard_data.get("quality", {})
+                prediction = predictor.predict({
+                    "quality_score": quality.get("overall_score", 50) / 100,
+                    "completeness_score": quality.get("completeness", 50) / 100,
+                    "uniqueness_score": quality.get("uniqueness", 50) / 100,
+                    "missing_percentage": 100 - quality.get("completeness", 50),
+                    "duplicate_percentage": 100 - quality.get("uniqueness", 50),
+                    "pii_count": 3,
+                    "total_rows": dashboard_data.get("data", {}).get("total_records", 1000),
+                    "total_columns": 15,
+                    "numeric_columns": 5,
+                })
+
+                risk_colors = {"Low": "🟢", "Medium": "🟡", "High": "🔴"}
+                risk_icon = risk_colors.get(prediction["risk_level"], "⚪")
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Risk Level", f"{risk_icon} {prediction['risk_level']}")
+                with col2:
+                    st.metric("Confidence", f"{prediction['risk_score']:.1f}%")
+                with col3:
+                    st.metric("Model Accuracy", "Cross-validated")
+
+                st.markdown("**Risk Probabilities:**")
+                prob_cols = st.columns(3)
+                for col, (level, prob) in zip(prob_cols, prediction["probabilities"].items()):
+                    with col:
+                        st.metric(level, f"{prob:.1f}%")
+
+                with st.expander("Feature Importance"):
+                    import pandas as pd
+                    contrib_df = pd.DataFrame(prediction["feature_contributions"])
+                    st.dataframe(contrib_df, use_container_width=True, hide_index=True)
+
+            except Exception as e:
+                st.error(f"Risk prediction failed: {e}")
+
 
 def get_dashboard_data() -> dict:
     """Get or generate dashboard data."""

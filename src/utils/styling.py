@@ -1,8 +1,85 @@
 """Custom CSS and styling for Streamlit app."""
 import streamlit as st
 
+
+def _get_light_css() -> str:
+    """Return light theme CSS overrides."""
+    return """
+    /* Light Theme Overrides */
+    .main {
+        background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%) !important;
+    }
+    h1, h2, h3 {
+        color: #1E293B !important;
+    }
+    h1 {
+        background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+    }
+    .stCard, .metric-card {
+        background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%) !important;
+        border: 1px solid rgba(37, 99, 235, 0.15) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+    }
+    .stCard:hover, .metric-card:hover {
+        border-color: rgba(37, 99, 235, 0.4) !important;
+        box-shadow: 0 8px 12px rgba(37, 99, 235, 0.1) !important;
+    }
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%) !important;
+        border-right: 1px solid rgba(37, 99, 235, 0.15) !important;
+    }
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea {
+        background-color: #FFFFFF !important;
+        color: #1E293B !important;
+        border: 1px solid rgba(37, 99, 235, 0.2) !important;
+    }
+    [data-testid="stMetricValue"] {
+        color: #2563EB !important;
+    }
+    [data-testid="stMetricLabel"] {
+        color: #64748B !important;
+    }
+    .metric-card div[style*="color: #9CA3AF"] {
+        color: #64748B !important;
+    }
+    .metric-card div[style*="color: #3B82F6"] {
+        color: #2563EB !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #F1F5F9 !important;
+        color: #1E293B !important;
+        border: 1px solid rgba(37, 99, 235, 0.15) !important;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: rgba(37, 99, 235, 0.08) !important;
+    }
+    .streamlit-expanderHeader {
+        background-color: #F8FAFC !important;
+        border: 1px solid rgba(37, 99, 235, 0.15) !important;
+    }
+    [data-testid="stFileUploader"] {
+        background-color: #FFFFFF !important;
+        border: 2px dashed rgba(37, 99, 235, 0.25) !important;
+    }
+    .dataframe thead tr th {
+        background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%) !important;
+    }
+    """
+
+
 def apply_custom_css():
     """Apply custom CSS styling to the Streamlit app."""
+    # Check theme preference
+    theme = "dark"
+    try:
+        theme = st.session_state.get("theme", "dark")
+    except Exception:
+        pass
+
     st.markdown("""
     <style>
     /* Import Google Fonts */
@@ -287,6 +364,10 @@ def apply_custom_css():
 
     </style>
     """, unsafe_allow_html=True)
+
+    # Inject light theme overrides if needed
+    if theme == "light":
+        st.markdown(f"<style>{_get_light_css()}</style>", unsafe_allow_html=True)
 
 
 def create_metric_card(label: str, value: str, delta: str = None, delta_color: str = "normal"):

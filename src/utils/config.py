@@ -24,9 +24,12 @@ SYNTHETIC_DATA_DIR = DATA_DIR / "synthetic"
 EXAMPLES_DATA_DIR = DATA_DIR / "examples"
 OUTPUT_DIR = PROJECT_ROOT / "outputs"
 LOGS_DIR = PROJECT_ROOT / "logs"
+HISTORY_DIR = DATA_DIR / "history"
+SNAPSHOTS_DIR = DATA_DIR / "snapshots"
+MODELS_DIR = DATA_DIR / "models"
 
 # Create directories if they don't exist
-for directory in [DATA_DIR, SYNTHETIC_DATA_DIR, EXAMPLES_DATA_DIR, OUTPUT_DIR, LOGS_DIR]:
+for directory in [DATA_DIR, SYNTHETIC_DATA_DIR, EXAMPLES_DATA_DIR, OUTPUT_DIR, LOGS_DIR, HISTORY_DIR, SNAPSHOTS_DIR, MODELS_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 # API Keys - Load from Streamlit secrets (production) or .env (local development)
@@ -62,6 +65,13 @@ MAX_RETRY_ATTEMPTS = 3
 MIN_DATA_QUALITY_SCORE = 0.7
 MAX_MISSING_PERCENTAGE = 10.0
 MAX_DUPLICATE_PERCENTAGE = 5.0
+
+# Theme Settings
+THEME_DEFAULT = "dark"  # "dark" or "light"
+
+# ML Model Settings
+ML_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+RISK_MODEL_PATH = MODELS_DIR / "risk_predictor.joblib"
 
 # Example Companies
 EXAMPLE_COMPANIES = [
